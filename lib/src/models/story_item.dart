@@ -5,6 +5,7 @@ import 'package:just_audio/just_audio.dart';
 class StoryItem {
   const StoryItem({
     this.url,
+    this.httpHeaders,
     required this.storyItemType,
     this.thumbnail,
     this.isMuteByDefault = false,
@@ -43,6 +44,9 @@ class StoryItem {
 
   /// Asset URL, File Path or Web URL
   final String? url;
+
+  /// HTTP headers for retrieving the data
+  final Map<String, String>? httpHeaders;
 
   /// Applicable when [storyItemType] is [StoryItemType.video]
   final bool isMuteByDefault;

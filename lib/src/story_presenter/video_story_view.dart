@@ -46,6 +46,7 @@ class _VideoStoryViewState extends State<VideoStoryView> {
         videoPlayerController =
             await VideoUtils.instance.videoControllerFromUrl(
           url: storyItem.url!,
+          httpHeaders: storyItem.httpHeaders ?? const {},
           cacheFile: storyItem.videoConfig?.cacheVideo,
           videoPlayerOptions: storyItem.videoConfig?.videoPlayerOptions,
         );
