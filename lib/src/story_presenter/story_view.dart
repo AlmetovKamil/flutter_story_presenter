@@ -120,6 +120,7 @@ class _FlutterStoryPresenterState extends State<FlutterStoryPresenter>
     }
     _animationController = AnimationController(
       vsync: this,
+      duration: _totalAudioDuration ?? const Duration(seconds: 3),
     );
     currentIndex = widget.initialIndex;
     widget.flutterStoryController?.addListener(_storyControllerListener);
@@ -240,6 +241,7 @@ class _FlutterStoryPresenterState extends State<FlutterStoryPresenter>
         _totalAudioDuration = v;
         _animationController ??= AnimationController(
           vsync: this,
+          duration: _totalAudioDuration ?? const Duration(seconds: 3),
         );
 
         _animationController?.duration = v;
@@ -270,6 +272,7 @@ class _FlutterStoryPresenterState extends State<FlutterStoryPresenter>
 
     _animationController ??= AnimationController(
       vsync: this,
+      duration: _totalAudioDuration ?? const Duration(seconds: 3),
     );
 
     _animationController?.duration =
@@ -360,9 +363,7 @@ class _FlutterStoryPresenterState extends State<FlutterStoryPresenter>
         currentIndex != (widget.items.length - 1)) {
       /// Dispose the video player only in case of multiple story
       isCurrentItemLoaded = false;
-      setState(() {
-
-      });
+      setState(() {});
       _currentVideoPlayer?.removeListener(videoListener);
       _currentVideoPlayer?.dispose();
       _currentVideoPlayer = null;
@@ -445,13 +446,11 @@ class _FlutterStoryPresenterState extends State<FlutterStoryPresenter>
               onLoaded: () {
                 isCurrentItemLoaded = true;
                 _startStoryCountdown();
-
               },
               onAudioLoaded: (audioPlayer) {
                 isCurrentItemLoaded = true;
                 _audioPlayer = audioPlayer;
                 _startStoryCountdown();
-
               },
             ),
           ),
