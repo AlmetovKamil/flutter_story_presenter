@@ -398,27 +398,26 @@ class _FlutterStoryPresenterState extends State<FlutterStoryPresenter>
       _audioDurationSubscriptionStream?.cancel();
       _audioPlayerStateStream?.cancel();
     }
-    if (_currentVideoPlayer != null) {
+    if (_currentVideoPlayer != null && currentIndex != 0) {
       _currentVideoPlayer?.removeListener(videoListener);
       _currentVideoPlayer?.dispose();
       _currentVideoPlayer = null;
     }
 
-    // if (currentIndex == 0) {
-    //   _resetAnimation();
-    //   _startStoryCountdown();
-    //   _playMedia();
-    //   if (mounted) {
-    //     setState(() {});
-    //   }
-    //   widget.onPreviousCompleted?.call();
-    //   return;
-    // }
+    if (currentIndex == 0) {
+      _resetAnimation();
+      _currentVideoPlayer?.seekTo(Duration.zero);
+      _currentVideoPlayer?.play();
+      _startStoryCountdown();
+      if (mounted) {
+        setState(() {});
+      }
+      widget.onPreviousCompleted?.call();
+      return;
+    }
 
     _resetAnimation();
-    if (currentIndex > 0) {
-      currentIndex = currentIndex - 1;
-    }
+    currentIndex = currentIndex - 1;
     widget.onStoryChanged?.call(currentIndex);
     _playMedia();
     if (mounted) {
