@@ -398,7 +398,7 @@ class _FlutterStoryPresenterState extends State<FlutterStoryPresenter>
       _audioDurationSubscriptionStream?.cancel();
       _audioPlayerStateStream?.cancel();
     }
-    if (_currentVideoPlayer != null) {
+    if (_currentVideoPlayer != null && currentIndex != 0) {
       _currentVideoPlayer?.removeListener(videoListener);
       _currentVideoPlayer?.dispose();
       _currentVideoPlayer = null;
